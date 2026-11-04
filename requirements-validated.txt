@@ -1,0 +1,13 @@
+# Versions validated locally on 2026-11-03; Python 3.11.9, CUDA builds cu128.
+torch==2.11.0
+torchvision==0.26.0
+numpy==2.4.6
+Pillow==12.3.0
+PyYAML==6.0.3
+scipy==1.17.1
+faster-coco-eval==1.8.0
+tensorboard==2.21.0
+calflops==0.3.2
+transformers==5.16.1
+loguru==0.7.3
+pycocotools==2.0.11

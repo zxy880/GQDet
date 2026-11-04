@@ -1,0 +1,12 @@
+逐图身份与划分清单
+
+image_identity_manifest.csv / .json：每张图片一条记录，包含原始文件名、训练时文件名、所属划分、COCO image_id、图像尺寸、实例数及原始/训练图像 SHA256。
+image_uid 使用 数据集名:原始文件名，作为本归档内跨划分唯一的标识；它不是数据集官方新颁发的编号。
+COCO image_id 仅在对应划分标注文件内唯一，不能单独作为跨 train/val/test 的唯一编号。查询时使用 image_uid 或 (split, coco_image_id)。
+
+HRSID 的 original_file_name 指原始训练数据中的 HRSID 切片文件名（例如 P0001_0_800_10190_10990.jpg），保留其原名；本清单不声称另有未经核实的大幅原始 SAR 场景文件映射。
+AIR 的 original_file_name 为原始 TIFF 名称（例如 1.tiff），training_file_name 为预处理后的 PNG 名称（例如 1.png），映射来自实际 TIFF 阶段 COCO 标注，不凭空编号。
+
+splits/train.txt、val.txt、test.txt：实际训练/评估文件名名单。
+splits/*_original_filenames.txt：对应原始文件名名单。
+复现时应严格按这些逐图名单恢复划分，不要仅按比例重新随机抽样。

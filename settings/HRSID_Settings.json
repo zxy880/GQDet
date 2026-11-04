@@ -1,0 +1,27 @@
+{
+  "model": "GQDet",
+  "dataset": "HRSID",
+  "input_size": [
+    640,
+    640
+  ],
+  "epochs": 120,
+  "batch_size": 12,
+  "pretrained_weights": "official D-FINE-S COCO pretrained weights",
+  "optimizer": {
+    "type": "AdamW",
+    "learning_rate": 0.000282143965893,
+    "backbone_learning_rate": 0.000171782705238,
+    "weight_decay": 9.45064901788e-05
+  },
+  "learning_rate_schedule": "Linear warmup followed by hold and cosine decay",
+  "data_augmentation": [
+    "Random zoom-out",
+    "Random IoU crop",
+    "Random horizontal flip (p=0.5)",
+    "Random grayscale gamma (0.9-1.1)",
+    "Random grayscale gain (0.9-1.1)"
+  ],
+  "training": "AMP with EMA",
+  "checkpoint_selection": "Validation AP50:95"
+}

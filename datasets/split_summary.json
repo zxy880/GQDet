@@ -1,0 +1,54 @@
+{
+  "hrsid": {
+    "train": {
+      "images": 3642,
+      "instances": 10752,
+      "annotation_sha256": "727c14d5e7e69c1b5c309427f2edba33d24955b057e188aea4ebef65200a1b1f",
+      "category_ids": [
+        1
+      ]
+    },
+    "val": {
+      "images": 1508,
+      "instances": 4694,
+      "annotation_sha256": "3915e784140af31bec6420a441876ca37d1159ba0308c395eafa3940b940bb17",
+      "category_ids": [
+        1
+      ]
+    },
+    "test": {
+      "images": 454,
+      "instances": 1505,
+      "annotation_sha256": "d9d78cab1ce6ac7fda5d6e5332f524db2b139bf7cbba57d73b7c900291c2eba2",
+      "category_ids": [
+        1
+      ]
+    }
+  },
+  "air": {
+    "train": {
+      "images": 210,
+      "instances": 1467,
+      "annotation_sha256": "784b1c93dc40986233459afc4a3529182d39d7fd5a482662a907555ce204b011",
+      "category_ids": [
+        0
+      ]
+    },
+    "val": {
+      "images": 30,
+      "instances": 168,
+      "annotation_sha256": "9c87b6209c7e531394c9f5b431b53b4d778fd0a666da02e8f5659b8e4a42c155",
+      "category_ids": [
+        0
+      ]
+    },
+    "test": {
+      "images": 60,
+      "instances": 405,
+      "annotation_sha256": "560f837f372a617dff94991556a008e475bba81e587d79a10043a2c228fb6ae9",
+      "category_ids": [
+        0
+      ]
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "seed": 20260904,
+  "split_sizes": {
+    "test": {
+      "images": 60,
+      "annotations": 405
+    },
+    "val": {
+      "images": 30,
+      "annotations": 168
+    },
+    "train": {
+      "images": 210,
+      "annotations": 1467
+    }
+  },
+  "source_labels": {
+    "ship": 2040
+  },
+  "split_overlap": false
+}

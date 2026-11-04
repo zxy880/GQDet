@@ -1,0 +1,1 @@
+GQDet builds on D-FINE and RT-DETR. Upstream source headers and the Apache-2.0 LICENSE are retained. Dataset images are obtained separately.

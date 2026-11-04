@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+checkpoints/*.pth
+output/
+datasets/**/images/
+*.log
+datasets/**/annotations/
+datasets/**/source_xml/
+datasets/**/yolo_labels/
