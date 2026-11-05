@@ -1,5 +1,9 @@
 # GQDet
 
+## License: CC BY 4.0
+
+The authors' original GQDet code and reproducibility materials are licensed under [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/). See [LICENSE](LICENSE) for the full text and [LICENSE_SCOPE.md](LICENSE_SCOPE.md) for scope and attribution. Retained third-party source portions keep their original terms and notices; see [THIRD_PARTY_NOTICES.txt](THIRD_PARTY_NOTICES.txt).
+
 This package contains the GQDet model implementation, fixed per-image dataset splits, preprocessing/conversion tools, and final training settings. Third-party original and converted annotations are obtained or generated locally, not redistributed here.
 
 ## Contents
@@ -75,4 +79,4 @@ python evaluate.py --dataset air --checkpoint /path/to/gqdet_air_ema.pth --outpu
 
 Evaluation uses FP32 EMA, 300 native predictions, COCO maxDets [1,10,100], and no additional confidence threshold or NMS. Reference Test AP50:95: HRSID 75.6076%; AIR 37.9960%.
 
-Dataset images, third-party original/converted annotations and weight binaries are not included in this package. Upstream notices and licenses are retained. See `LICENSE_SCOPE.md` for the separate software and non-code-material licenses.
+Dataset images, third-party original/converted annotations and weight binaries are not included in this package. Upstream notices and licenses are retained. See `LICENSE_SCOPE.md` for the CC BY 4.0 grant and retained third-party terms.

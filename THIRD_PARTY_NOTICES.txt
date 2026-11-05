@@ -1,1 +1,3 @@
-GQDet builds on D-FINE and RT-DETR. Upstream source headers and the Apache-2.0 LICENSE are retained. Dataset images are obtained separately.
+GQDet builds on D-FINE and RT-DETR and includes source portions carrying their upstream copyright notices, including notices crediting lyuwenyu and Facebook, Inc. and its affiliates. Those notices are retained in the source files. Upstream portions remain subject to their original terms; the retained Apache License 2.0 text is in LICENSES/Apache-2.0.txt.
+
+The GQDet authors' original contributions are licensed under CC BY 4.0; see LICENSE and LICENSE_SCOPE.md. This does not relicense third-party portions. Dataset images and original/converted annotations are obtained separately and are not included.
