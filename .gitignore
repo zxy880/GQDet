@@ -1,9 +1,10 @@
 __pycache__/
 *.pyc
-checkpoints/*.pth
+.venv/
 output/
-datasets/**/images/
-*.log
-datasets/**/annotations/
-datasets/**/source_xml/
-datasets/**/yolo_labels/
+*.pth
+*.pt
+datasets/*/images/
+datasets/*/annotations/
+datasets/*/source_xml/
+datasets/*/yolo_labels/

@@ -1,82 +1,49 @@
-# GQDet
+# GQDet — Original Modules and Research Materials
 
-## License: CC BY 4.0
+**License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).**
 
-The authors' original GQDet code and reproducibility materials are licensed under [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/). See [LICENSE](LICENSE) for the full text and [LICENSE_SCOPE.md](LICENSE_SCOPE.md) for scope and attribution. Retained third-party source portions keep their original terms and notices; see [THIRD_PARTY_NOTICES.txt](THIRD_PARTY_NOTICES.txt).
-
-This package contains the GQDet model implementation, fixed per-image dataset splits, preprocessing/conversion tools, and final training settings. Third-party original and converted annotations are obtained or generated locally, not redistributed here.
+This release contains the authors' original GQDet modules and reproducibility materials for *Geometry-Preserving Representation and Quality-Coupled Query Training for SAR Ship Detection*. All original content distributed in this release is licensed under CC BY 4.0; see LICENSE and LICENSE_SCOPE.md.
 
 ## Contents
 
-- `src/`: model, GPDM, QCC, RGQS, LJO and training infrastructure.
-- `configs/gqdet_hrsid.yml`, `configs/gqdet_air.yml`: final dataset configurations.
-- `settings/`: concise experimental settings.
-- `datasets/`: original filenames, unique image identifiers, fixed splits and SHA256 inventories (no target-coordinate annotations).
-- `tools/data/`: annotation conversion and image preparation.
+- `gqdet/gpdm.py`: the original GPDM feature-injection module.
+- `gqdet/rgqs.py`: the original candidate selection, conflict resolution, quality/rank weighting and auxiliary schedule methods, separated from the detector criterion.
+- `gqdet/qcqt_losses.py`: standalone tensor interfaces for QCC and the three RGQS auxiliary losses.
+- `gqdet/ljo.py`: original matching-cost and negative-loss schedules.
+- `configs/` and `settings/`: experiment-specific model/training parameters. HRSID uses 120 epochs; AIR-SARShip-2.0 uses 150 epochs.
+- `datasets/`: exact per-image splits, original filename/ID mappings and integrity inventories.
+- `tools/data/`: original preparation and annotation-conversion scripts.
 
-## Environment
+## Scope and use
 
-Use Python 3.11 and install `python -m pip install -r requirements.txt`. Exact versions validated locally are recorded in `requirements-validated.txt` (PyTorch CUDA build cu128). Select a CUDA build supported by your hardware.
+This is an original-module and research-material release, **not a standalone detector training distribution**. The third-party detector backbone, encoder/decoder, base criterion, matcher, trainer and training entry point are not bundled. The experiment configuration files document the integrated experiment; they cannot be passed unchanged to an unmodified upstream installation. Obtain D-FINE separately from [the official repository](https://github.com/Peterande/D-FINE), and follow its own license. PyTorch, torchvision and other external dependencies are installed separately and are not included in this archive.
 
-## Data
+See INTEGRATION.md for tensor interfaces and integration points. The GPDM implementation and extracted RGQS selection/schedule methods retain their experiment computations; the standalone loss interfaces are reorganized mathematical kernels. This release has not been retrained as a complete integrated detector and does not claim that the standalone package alone reproduces the reported AP values.
 
-Obtain images and annotations from the original providers, subject to their terms:
+## Dataset preparation
+
+Original dataset images and original/converted annotations are not distributed. Obtain the official data from their providers:
 
 - HRSID: https://github.com/chaozhong2010/HRSID
-- AIR-SARShip-2.0: https://radars.ac.cn/web/data/getData?newsColumnId=74fe223a-0b01-4830-8d99-1ba276e67ad8&pageType=en
+- AIR-SARShip: https://radars.ac.cn/web/data/getData?dataType=SARship
 
-Restore HRSID's exact split from its image filenames:
-
-```sh
-python tools/data/restore_hrsid_images.py --source-images /path/to/HRSID/images
-```
-
-Rebuild HRSID annotations from the complete compatible original COCO release (supply all necessary JSON files, not only the upstream training subset):
+Keep the provided image identities and splits unchanged. The conversion tools create labels locally from separately obtained originals. For example:
 
 ```sh
-python tools/data/rebuild_annotations.py --dataset hrsid --hrsid-coco /path/to/original/train.json /path/to/original/test.json
+python tools/data/rebuild_annotations.py --dataset hrsid --hrsid-coco /path/to/original_annotations.json
+python tools/data/rebuild_annotations.py --dataset air --air-xml-root /path/to/original_xml
 ```
 
-The converter follows the experimental six-decimal YOLO intermediate representation before constructing COCO boxes. If you already have the original experimental YOLO labels separately, use `--hrsid-yolo-root /path/to/labels` instead of `--hrsid-coco`.
+Other preparation options are documented by each tool's `--help` and `datasets/逐图身份与划分说明.txt`. `datasets/annotation_checksums.json` contains checksums, not bounding-box labels.
 
-Rebuild AIR annotations from the official XML files using the fixed image-identity manifest, then prepare TIFF images with per-image 1st/99th percentile normalization:
+## Attribution
 
-```sh
-python tools/data/rebuild_annotations.py --dataset air --air-xml-root /path/to/AIR-SARShip-2.0-xml
-python tools/data/prepare_air_sarship20_official_input.py --image-root /path/to/AIR-SARShip-2.0-data --split-root datasets/air/source_tiff_split --output-root datasets/air
-```
+Credit Hui Luo, Xinyang Zhang and Yang Du, cite GQDet and its Zenodo archive, link to CC BY 4.0, and indicate changes. Hui Luo and Xinyang Zhang contributed equally and share first authorship.
 
-The reconstruction entry point never randomly resplits. Original and processed image identities are mapped in each dataset's `image_identity_manifest.csv` and `.json`. Output annotation paths in these manifests refer to files generated locally. `datasets/annotation_checksums.json` contains canonical-JSON hashes only, with no target coordinates; all three splits must match the experimental annotations before any output is written. A missing-image, instance-count or checksum mismatch indicates an incompatible/incomplete source annotation release and stops reconstruction. The upstream HRSID repository's single training JSON is not a complete replacement for the original experimental release; do not silently substitute versions. Local validation reproduced all six experimental COCO files from the original external HRSID YOLO labels and AIR XML files. Complete official-COCO reconstruction still requires the matching complete upstream release.
+Repository: https://github.com/zxy880/GQDet
 
-The lower-level `prepare_hrsid.py` (YOLO to COCO) and `prepare_air_sarship20.py` (XML to COCO) implementations are retained. Do not use the latter's random-split defaults to reproduce this paper; use `rebuild_annotations.py` and the archived memberships instead.
+This release (v1.1.0): https://doi.org/10.5281/zenodo.23945298
 
-## Training
+Zenodo version family: https://doi.org/10.5281/zenodo.23910745
 
-Run from this package root. Place the official D-FINE-S COCO pretrained file at `checkpoints/dfine_s_coco.pth`.
-
-```sh
-python train.py -c configs/gqdet_hrsid.yml --use-amp
-python train.py -c configs/gqdet_air.yml --use-amp
-```
-
-| Setting | HRSID | AIR-SARShip-2.0 |
-| --- | --- | --- |
-| Input size | 640 × 640 | 640 × 640 |
-| Training epochs | 120 | 150 |
-| Batch size | 12 | 8 |
-| Optimizer | AdamW | AdamW |
-
-Both datasets use official D-FINE-S COCO initialization, AMP training, and EMA. Select the checkpoint by validation AP50:95. Common experimental settings are summarized in `settings/`; executable configurations are in `configs/`.
-
-## Evaluation
-
-Use a corresponding GQDet EMA weight file obtained separately:
-
-```sh
-python evaluate.py --dataset hrsid --checkpoint /path/to/gqdet_hrsid_ema.pth --output output/hrsid_test.json
-python evaluate.py --dataset air --checkpoint /path/to/gqdet_air_ema.pth --output output/air_test.json
-```
-
-Evaluation uses FP32 EMA, 300 native predictions, COCO maxDets [1,10,100], and no additional confidence threshold or NMS. Reference Test AP50:95: HRSID 75.6076%; AIR 37.9960%.
-
-Dataset images, third-party original/converted annotations and weight binaries are not included in this package. Upstream notices and licenses are retained. See `LICENSE_SCOPE.md` for the CC BY 4.0 grant and retained third-party terms.
+The CC BY grant applies to this release's original contents. It does not relicense separately obtained software, images, annotations or weights. Earlier releases and commits retain their own licensing scopes.

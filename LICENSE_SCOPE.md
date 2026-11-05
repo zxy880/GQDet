@@ -1,15 +1,11 @@
-# Licensing scope
+# CC BY 4.0
 
-## GQDet: CC BY 4.0
+Copyright (c) 2026 Hui Luo, Xinyang Zhang and Yang Du.
 
-The GQDet authors license their original contributions in this repository and the corresponding Zenodo archive under Creative Commons Attribution 4.0 International (CC BY 4.0): https://creativecommons.org/licenses/by/4.0/ . The full license is provided in LICENSE.
+The authors license all their original content distributed in this release under Creative Commons Attribution 4.0 International (CC BY 4.0): https://creativecommons.org/licenses/by/4.0/ . The full legal text is in LICENSE.
 
-This grant covers the authors' original GPDM and QCQT implementations and modifications, original training/evaluation and preprocessing/conversion code, configurations, training-setting documentation, dataset split lists and manifests, image-identity mappings, checksum inventories, and documentation. Please attribute Hui Luo, Xinyang Zhang, and Yang Du, cite GQDet and https://doi.org/10.5281/zenodo.23910746, link to the license, and indicate changes, as required by CC BY 4.0.
+The grant covers the original modules in gqdet/, preparation/conversion tools, experiment parameter configurations and settings, documentation, exact dataset split lists, identity mappings, and checksum inventories.
 
-## Third-party components
+Third-party detector source code, external dependency implementations, dataset images, original/converted annotations, and pretrained weights are not bundled in this release. Obtain them separately under their respective licenses. References to external projects, dataset names, identifiers and filenames do not transfer rights in the referenced works. This license does not retroactively replace the licenses of earlier releases or commits.
 
-This grant covers only rights held by the GQDet authors. Existing D-FINE, RT-DETR, and other third-party source portions retain their original copyright notices and license terms. The Apache License 2.0 copy in LICENSES/Apache-2.0.txt is retained for those upstream portions; it is not the license offered for the authors' original GQDet contributions. See THIRD_PARTY_NOTICES.txt and the source headers. No third-party rights are relicensed by this notice.
-
-## External datasets
-
-Original HRSID and AIR-SARShip-2.0 images and original/converted annotations are not redistributed here. Obtain them from their original providers under the providers' terms. The included conversion tools generate annotations locally; the license on those tools does not relicense external data or its converted annotations.
+When reusing these materials, provide appropriate author attribution, a link to CC BY 4.0, and an indication of changes as specified in the license.
