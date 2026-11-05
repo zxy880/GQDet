@@ -44,6 +44,4 @@ Repository: https://github.com/zxy880/GQDet
 
 This release (v1.1.0): https://doi.org/10.5281/zenodo.23945298
 
-Zenodo version family: https://doi.org/10.5281/zenodo.23910745
-
 The CC BY grant applies to this release's original contents. It does not relicense separately obtained software, images, annotations or weights. Earlier releases and commits retain their own licensing scopes.
